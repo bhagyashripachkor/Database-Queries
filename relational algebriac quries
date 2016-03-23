@@ -1,0 +1,25 @@
+Instructions: You have to write relational algebra expressions over the pizza database. 
+
+
+Q1. Find all pizzas eaten by at least one female over the age of 20. 
+Q2. Find the names of all females who eat at least one pizza served by Straw Hat. (Note: The pizza need not be eaten at Straw Hat.) 
+Q3. Find all pizzerias that serve at least one pizza for less than $10 that either Amy or Fay (or both) eat. 
+Q4. Find all pizzerias that serve at least one pizza for less than $10 that both Amy and Fay eat. 
+Q5. Find the names of all people who eat at least one pizza served by Dominos but who do not frequent Dominos.
+Q6.Find all pizzas that are eaten only by people younger than 24, or that cost less than $10 everywhere they're served.
+Q7.Find the age of the oldest person (or people) who eat mushroom pizza.
+
+Answer :-
+1.	π (pizza) (σ (age > 20 ^ gender="female")(Person ⋈ Eats))
+
+2.	π (name)( σ (gender = "female" ^ pizzeria = "StrawHat")(Person ⋈ Frequents))
+
+3.	π (pizzeria)( σ (price < $10  ^ (name = "Amy" V name = "Fay"))(Eats ⋈ Serves))
+
+4.	π (pizzeria)( σ (price < $10  ^  name = "Amy" ^  name = "Fay" )(Eats ⋈ Serves))
+
+5.	π (name)( π (name)Person  - π (name)( σ(pizza  = "Dominos")(Frequents  ⋈ Eats))
+
+6.	π (pizza) (σ (age > 24 V price < $10)(Serves ⋈ (Person ⋈ Eats)))
+
+7.	π (MAX(age) ( σ ( pizza = "Mushroom") )(Person ⋈ Eats))
